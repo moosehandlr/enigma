@@ -1,8 +1,9 @@
 class Enigma
-  attr_reader :keys, :offsets
+  attr_reader :keys, :offsets, :shifts
  def initialize
    @keys = Hash.new
    @offsets = Hash.new
+   @shifts = Hash.new
  end
 
  def gen_keys(num)
@@ -22,6 +23,11 @@ class Enigma
    @offsets[:b_offset] = offset_nums[1].to_i
    @offsets[:c_offset] = offset_nums[2].to_i
    @offsets[:d_offset] = offset_nums[3].to_i
+ end
+
+ def gen_shifts
+   require "pry"; binding.pry
+   @key.values
  end
 
 
