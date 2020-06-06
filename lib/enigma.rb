@@ -5,8 +5,9 @@ class Enigma
    @offsets = Hash.new
  end
 
- def gen_keys
-   random = 5.times.map{rand(0..9)}
+ def gen_keys(num)
+   # random = 5.times.map{rand(0..9)}
+   random = num.split(//)
    key_nums = random.each_cons(2).to_a
    @keys[:a_key] = key_nums[0].join.to_i
    @keys[:b_key] = key_nums[1].join.to_i
@@ -22,7 +23,6 @@ class Enigma
    @offsets[:c_offset] = offset_nums[2].to_i
    @offsets[:d_offset] = offset_nums[3].to_i
  end
-
 
 
 end
