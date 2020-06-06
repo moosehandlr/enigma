@@ -28,9 +28,17 @@ class EnigmaTest < Minitest::Test
     enigma = Enigma.new
     enigma.gen_keys("02715")
     enigma.gen_offsets("040895")
+    enigma.gen_shifts
 
     expected = {a_shift: 3, b_shift: 27, c_shift: 73, d_shift: 20}
     assert_equal expected, enigma.shifts
+    p enigma.shifts
+  end
+
+  def test_it_can_encrypt_message
+    enigma = Enigma.new
+    expected = {encryption: "keder ohulw", key: "02715", date: "040895"}
+    assert_equal expected, enigma.encrypt("hello world", "02715", "040895")
   end
 
 end
