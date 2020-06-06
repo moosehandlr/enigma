@@ -1,9 +1,11 @@
 class Enigma
-  attr_reader :keys, :offsets, :shifts
+  attr_reader :keys, :offsets, :shifts, :alphabet, :encryption
  def initialize
    @keys = Hash.new
    @offsets = Hash.new
    @shifts = Hash.new
+   @alphabet = ("a".."z").to_a << " "
+   @encryption = Hash.new
  end
 
  def gen_keys(num)
@@ -34,7 +36,7 @@ class Enigma
  end
 
  def encrypt(message, key, date)
-   
+
  end
 
 end
