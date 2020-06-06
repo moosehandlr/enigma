@@ -16,8 +16,11 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_date_offsets
-    expected = {aoffset: 1, boffset: 0, coffset: 2, doffset: 5}
-    assert_equal expected, enigma.offsets(040895)
+    enigma = Enigma.new
+    expected = {a_offset: 1, b_offset: 0, c_offset: 2, d_offset: 5}
+    enigma.gen_offsets("040895")
+    assert_equal expected, enigma.offsets
+    p enigma.offsets
   end
 
 end
