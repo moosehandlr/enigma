@@ -14,6 +14,10 @@ class Enigma
    @keys[:dkey] = key_nums[3].join.to_i
  end
 
+ def gen_offsets(date)
+
+ end
+
 
 
 end

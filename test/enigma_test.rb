@@ -15,4 +15,9 @@ class EnigmaTest < Minitest::Test
     p enigma.keys
   end
 
+  def test_it_can_generate_date_offsets
+    expected = {aoffset: 1, boffset: 0, coffset: 2, doffset: 5}
+    assert_equal expected, enigma.offsets(040895)
+  end
+
 end
