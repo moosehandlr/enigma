@@ -25,6 +25,12 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_shifts
+    enigma = Enigma.new
+    enigma.gen_keys("02715")
+    enigma.gen_offsets("040895")
+
+    expected = {a_shift: 3, b_shift: 27, c_shift: 73, d_shift: 20}
+    assert_equal expected, enigma.shifts
   end
 
 end
