@@ -13,9 +13,7 @@ class KeysTest < Minitest::Test
     assert_equal expected, Keys.gen_keys("02715")
   end
 
-  def test_it_can_generate_random_keys
-    skip
-    expected = {a_key: 71, b_key: 03, c_key: 16, d_key: 22}
-    assert_equal expected, Keys.gen_random
+  def test_it_can_generate_string_of_random_keys
+    assert_equal "00000", Keys.gen_random
   end
 end
