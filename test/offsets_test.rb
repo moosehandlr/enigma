@@ -4,7 +4,8 @@ require './lib/offsets'
 class OffsetsTest < Minitest::Test
 
   def test_it_exists
-    assert_instance_of <Class>,
+    offset = Offsets.new
+    assert_instance_of Offsets, offset
   end
 
 end
