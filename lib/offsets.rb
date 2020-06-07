@@ -1,3 +1,4 @@
+require 'date'
 class Offsets
 #Consider refactpr converting hashes to arrays
   def self.gen_offsets(date)
