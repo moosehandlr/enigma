@@ -7,13 +7,14 @@ class Enigma
   attr_reader :alphabet
  def initialize
    @alphabet = ("a".."z").to_a << " "
+   @date = Offsets.gen_today
+   @key = Keys.gen_random
  end
 
- def encrypt(message, key, date)
+ def encrypt(message, key = @key, date = @date)
    shifts = Shifts.gen_shifts(key, date)
    encryption = {}
    encrypted_message = []
-
    parse_message = message.chars.each_slice(4).to_a
    parse_message.each do |group|
      Hash[group.map.with_index {|x, i| [i, x]}].each do |k,v|
@@ -34,11 +35,10 @@ class Enigma
    encryption
  end
 
- def decrypt(ciphertext, key, date)
+ def decrypt(ciphertext, key, date = @date)
    shifts = Shifts.gen_shifts(key, date)
    decryption = {}
    decrypted_message = []
-
    parse_ciphertext = ciphertext.chars.each_slice(4).to_a
    parse_ciphertext.each do |group|
      Hash[group.map.with_index {|x, i| [i, x]}].each do |k,v|
