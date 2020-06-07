@@ -20,4 +20,23 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
+  def test_it_can_encrypt_message_with_key_and_todays_date
+    enigma = Enigma.new
+    encrypted = enigma.encrypt("hello world", "02715")
+    expected = {encryption: "nib udmcxpu", key: "02715", date: "070620"}
+    assert_equal expected, encrypted
+  end
+
+  def test_it_can_decrypt_message_with_key_and_todays_date
+    enigma = Enigma.new
+    encrypted = enigma.encrypt("hello world", "02715")
+    expected = {decryption: "hello world", key: "02715", date: "070620"}
+    assert_equal expected ,enigma.decrypt(encrypted[:encryption], "02715")
+  end
+
+  def test_it_can_encrypt_message_with_random_key_and_todays_date
+    enigma = Enigma.new
+    assert hash, enigma.encrypt("hello world")
+  end
+
 end
