@@ -1,16 +1,15 @@
 require 'date'
 
 class Enigma
-  attr_reader :keys, :offsets, :shifts, :alphabet, :encryption
+  attr_reader :offsets, :shifts, :alphabet, :encryption
  def initialize
-   @keys = Hash.new
    @offsets = Hash.new
    @shifts = Hash.new
    @alphabet = ("a".."z").to_a << " "
    @encryption = Hash.new
  end
 
- 
+
  def gen_offsets(date)
    date_squared = date.to_i**2
    offset_nums = date_squared.to_s.split(//).last(4)
