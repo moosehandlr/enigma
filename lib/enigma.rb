@@ -9,16 +9,6 @@ class Enigma
    @encryption = Hash.new
  end
 
-
- def gen_offsets(date)
-   date_squared = date.to_i**2
-   offset_nums = date_squared.to_s.split(//).last(4)
-   @offsets[:a_offset] = offset_nums[0].to_i
-   @offsets[:b_offset] = offset_nums[1].to_i
-   @offsets[:c_offset] = offset_nums[2].to_i
-   @offsets[:d_offset] = offset_nums[3].to_i
- end
-
  def gen_shifts
    shift_vals = @keys.values.zip(@offsets.values)
    @shifts[:a_shift] = shift_vals[0].sum
