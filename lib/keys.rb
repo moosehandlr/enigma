@@ -1,5 +1,5 @@
 class Keys
-#Consider refatcor convert hashes to arrays
+  
   def self.gen_keys(key)
     keys = {}
     paired_keys = key.split(//).each_cons(2).to_a

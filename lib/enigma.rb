@@ -58,5 +58,4 @@ class Enigma
    decryption[:date] = date
    decryption
  end
-
 end

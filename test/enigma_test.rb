@@ -38,5 +38,4 @@ class EnigmaTest < Minitest::Test
     enigma = Enigma.new
     assert hash, enigma.encrypt("hello world")
   end
-
 end

@@ -1,6 +1,6 @@
 require 'date'
 class Offsets
-#Consider refactpr converting hashes to arrays
+
   def self.gen_offsets(date)
     offsets = {}
     date_squared = date.to_i**2

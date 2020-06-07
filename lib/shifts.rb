@@ -2,6 +2,7 @@ require './lib/keys'
 require './lib/offsets'
 
 class Shifts
+
   def self.gen_shifts(key, date)
     shifts = {}
     keys = Keys.gen_keys(key)
