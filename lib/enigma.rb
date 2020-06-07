@@ -10,16 +10,7 @@ class Enigma
    @encryption = Hash.new
  end
 
- def gen_keys(key)
-   # random = 5.times.map{rand(0..9)}
-   random = key.split(//)
-   key_nums = random.each_cons(2).to_a
-   @keys[:a_key] = key_nums[0].join.to_i
-   @keys[:b_key] = key_nums[1].join.to_i
-   @keys[:c_key] = key_nums[2].join.to_i
-   @keys[:d_key] = key_nums[3].join.to_i
- end
-
+ 
  def gen_offsets(date)
    date_squared = date.to_i**2
    offset_nums = date_squared.to_s.split(//).last(4)
