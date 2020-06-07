@@ -8,15 +8,10 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, enigma
   end
 
-  def test_it_can_encrypt_message
+  def test_it_can_encrypt_message_and_return_hash
     enigma = Enigma.new
-    enigma.gen_keys("02715")
-    enigma.gen_offsets("040895")
-    enigma.gen_shifts
-    enigma.encrypt("HELLO WORLD", "02715", "040895")
-
     expected = {encryption: "keder ohulw", key: "02715", date: "040895"}
-    assert_equal expected, enigma.encryption
+    assert_equal expected, enigma.encrypt("HELLO WORLD", "02715", "040895")
   end
 
 end
