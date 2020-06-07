@@ -10,9 +10,9 @@ class Enigma
    @encryption = Hash.new
  end
 
- def gen_keys(num)
+ def gen_keys(key)
    # random = 5.times.map{rand(0..9)}
-   random = num.split(//)
+   random = key.split(//)
    key_nums = random.each_cons(2).to_a
    @keys[:a_key] = key_nums[0].join.to_i
    @keys[:b_key] = key_nums[1].join.to_i
