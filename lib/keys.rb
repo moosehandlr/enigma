@@ -21,8 +21,4 @@ class Keys
     keys[:d_key] = paired_keys[3].join.to_i
     keys
   end
-
-  def hash_render
-
-  end
 end
