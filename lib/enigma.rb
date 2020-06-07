@@ -39,17 +39,17 @@ class Enigma
 
  def encrypt(message, key, date)
    encrypted_message = []
-   chunked_message = message.chars.each_slice(4).to_a
-   chunked_message.each do |chunk|
-     Hash[chunk.map.with_index { |x, i| [i, x] }].each do |k,v|
+   split_message = message.chars.each_slice(4).to_a
+   split_message.each do |split|
+     Hash[split.map.with_index { |x, i| [i, x] }].each do |k,v|
        if k == 0
-         encrypted_message << @alphabet.rotate(@shifts[:a_shift])[@alphabet.index(chunk[0].downcase)]
+         encrypted_message << @alphabet.rotate(@shifts[:a_shift])[@alphabet.index(split[0].downcase)]
        elsif k == 1
-         encrypted_message << @alphabet.rotate(@shifts[:b_shift])[@alphabet.index(chunk[1].downcase)]
+         encrypted_message << @alphabet.rotate(@shifts[:b_shift])[@alphabet.index(split[1].downcase)]
        elsif k == 2
-         encrypted_message << @alphabet.rotate(@shifts[:c_shift])[@alphabet.index(chunk[2].downcase)]
+         encrypted_message << @alphabet.rotate(@shifts[:c_shift])[@alphabet.index(split[2].downcase)]
        elsif k == 3
-         encrypted_message << @alphabet.rotate(@shifts[:d_shift])[@alphabet.index(chunk[3].downcase)]
+         encrypted_message << @alphabet.rotate(@shifts[:d_shift])[@alphabet.index(split[3].downcase)]
        end
      end
    end
@@ -57,39 +57,6 @@ class Enigma
    @encryption[:encryption] = encrypted_message.join
    @encryption[:key] = key
    @encryption[:date] = date
-
-
-
-     # first_letter_encryption = @alphabet.rotate(@shifts[:a_shift])[@alphabet.index(chunk[0].downcase)]
-     # second_letter_encryption = @alphabet.rotate(@shifts[:b_shift])[@alphabet.index(chunk[1].downcase)]
-     # third_letter_encryption = @alphabet.rotate(@shifts[:c_shift])[@alphabet.index(chunk[2].downcase)]
-     # fourth_letter_encryption = @alphabet.rotate(@shifts[:d_shift])[@alphabet.index(chunk[3].downcase)]
-
-
-
-
-
-
-
-     # encrypted_message << @alphabet.rotate(@shifts[:a_shift])[@alphabet.index(chunk[0].downcase)]
-     # encrypted_message << @alphabet.rotate(@shifts[:b_shift])[@alphabet.index(chunk[1].downcase)]
-     # encrypted_message << @alphabet.rotate(@shifts[:c_shift])[@alphabet.index(chunk[2].downcase)]
-     # encrypted_message << @alphabet.rotate(@shifts[:d_shift])[@alphabet.index(chunk[3].downcase)]
-
-
-   # first_letter_encryption = @alphabet.rotate(@shifts[:a_shift])[@alphabet.index(chunk[0].downcase)]
-   # encrypted_message << first_letter_encryption
-   #
-   # second_letter_encryption = @alphabet.rotate(@shifts[:b_shift])[@alphabet.index(chunked_message[0][1].downcase)]
-   # encrypted_message << second_letter_encryption
-   #
-   # third_letter_encryption = @alphabet.rotate(@shifts[:c_shift])[@alphabet.index(chunked_message[0][2].downcase)]
-   # encrypted_message << third_letter_encryption
-   #
-   # fourth_letter_encryption = @alphabet.rotate(@shifts[:d_shift])[@alphabet.index(chunked_message[0][3].downcase)]
-   # encrypted_message << fourth_letter_encryption
-
-
  end
 
 end
