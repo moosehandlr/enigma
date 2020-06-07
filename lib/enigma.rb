@@ -1,42 +1,61 @@
 require 'date'
+require './lib/keys'
+require './lib/offsets'
+require './lib/shifts'
 
 class Enigma
-  attr_reader :offsets, :shifts, :alphabet, :encryption
+  attr_reader :alphabet
  def initialize
-   @offsets = Hash.new
-   @shifts = Hash.new
    @alphabet = ("a".."z").to_a << " "
-   @encryption = Hash.new
+   @date = Offsets.gen_today
+   @key = Keys.gen_random
  end
 
- def gen_shifts
-   shift_vals = @keys.values.zip(@offsets.values)
-   @shifts[:a_shift] = shift_vals[0].sum
-   @shifts[:b_shift] = shift_vals[1].sum
-   @shifts[:c_shift] = shift_vals[2].sum
-   @shifts[:d_shift] = shift_vals[3].sum
- end
-
- def encrypt(message, key, date)
+ def encrypt(message, key = @key, date = @date)
+   shifts = Shifts.gen_shifts(key, date)
+   encryption = {}
    encrypted_message = []
-   split_message = message.chars.each_slice(4).to_a
-   split_message.each do |split|
-     Hash[split.map.with_index { |x, i| [i, x] }].each do |k,v|
+   parse_message = message.chars.each_slice(4).to_a
+   parse_message.each do |group|
+     Hash[group.map.with_index {|x, i| [i, x]}].each do |k,v|
        if k == 0
-         encrypted_message << @alphabet.rotate(@shifts[:a_shift])[@alphabet.index(split[0].downcase)]
+         encrypted_message << @alphabet.rotate(shifts[:a_shift])[@alphabet.index(group[0].downcase)]
        elsif k == 1
-         encrypted_message << @alphabet.rotate(@shifts[:b_shift])[@alphabet.index(split[1].downcase)]
+         encrypted_message << @alphabet.rotate(shifts[:b_shift])[@alphabet.index(group[1].downcase)]
        elsif k == 2
-         encrypted_message << @alphabet.rotate(@shifts[:c_shift])[@alphabet.index(split[2].downcase)]
+         encrypted_message << @alphabet.rotate(shifts[:c_shift])[@alphabet.index(group[2].downcase)]
        elsif k == 3
-         encrypted_message << @alphabet.rotate(@shifts[:d_shift])[@alphabet.index(split[3].downcase)]
+         encrypted_message << @alphabet.rotate(shifts[:d_shift])[@alphabet.index(group[3].downcase)]
        end
      end
    end
-
-   @encryption[:encryption] = encrypted_message.join
-   @encryption[:key] = key
-   @encryption[:date] = date
+   encryption[:encryption] = encrypted_message.join
+   encryption[:key] = key
+   encryption[:date] = date
+   encryption
  end
 
+ def decrypt(ciphertext, key, date = @date)
+   shifts = Shifts.gen_shifts(key, date)
+   decryption = {}
+   decrypted_message = []
+   parse_ciphertext = ciphertext.chars.each_slice(4).to_a
+   parse_ciphertext.each do |group|
+     Hash[group.map.with_index {|x, i| [i, x]}].each do |k,v|
+       if k == 0
+         decrypted_message << @alphabet.rotate(shifts[:a_shift]*-1)[@alphabet.index(group[0].downcase)]
+       elsif k == 1
+         decrypted_message << @alphabet.rotate(shifts[:b_shift]*-1)[@alphabet.index(group[1].downcase)]
+       elsif k == 2
+         decrypted_message << @alphabet.rotate(shifts[:c_shift]*-1)[@alphabet.index(group[2].downcase)]
+       elsif k == 3
+         decrypted_message << @alphabet.rotate(shifts[:d_shift]*-1)[@alphabet.index(group[3].downcase)]
+       end
+     end
+   end
+   decryption[:decryption] = decrypted_message.join
+   decryption[:key] = key
+   decryption[:date] = date
+   decryption
+ end
 end
