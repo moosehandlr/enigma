@@ -3,18 +3,8 @@ require 'date'
 class Enigma
   attr_reader :offsets, :shifts, :alphabet, :encryption
  def initialize
-   @offsets = Hash.new
-   @shifts = Hash.new
    @alphabet = ("a".."z").to_a << " "
    @encryption = Hash.new
- end
-
- def gen_shifts
-   shift_vals = @keys.values.zip(@offsets.values)
-   @shifts[:a_shift] = shift_vals[0].sum
-   @shifts[:b_shift] = shift_vals[1].sum
-   @shifts[:c_shift] = shift_vals[2].sum
-   @shifts[:d_shift] = shift_vals[3].sum
  end
 
  def encrypt(message, key, date)
