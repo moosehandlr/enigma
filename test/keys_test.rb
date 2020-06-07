@@ -14,6 +14,6 @@ class KeysTest < Minitest::Test
   end
 
   def test_it_can_generate_string_of_random_keys
-    assert_equal "00000", Keys.gen_random
+    assert "string", Keys.gen_random
   end
 end
