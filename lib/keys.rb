@@ -1,8 +1,6 @@
 class Keys
-  def initialize
-  end
-
-  def gen_keys(key)
+#Consider refatcor convert hashes to arrays
+  def self.gen_keys(key)
     keys = {}
     paired_keys = key.split(//).each_cons(2).to_a
     keys[:a_key] = paired_keys[0].join.to_i
@@ -12,7 +10,7 @@ class Keys
     keys
   end
 
-  def gen_random
+  def self.gen_random
     keys = {}
     paired_keys = 5.times.map{rand(0..9)}.each_cons(2).to_a
     keys[:a_key] = paired_keys[0].join.to_i

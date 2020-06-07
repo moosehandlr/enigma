@@ -1,8 +1,6 @@
 class Offsets
-  def initialize
-  end
-
-  def gen_offsets(date)
+#Consider refactpr converting hashes to arrays
+  def self.gen_offsets(date)
     offsets = {}
     date_squared = date.to_i**2
     offset_nums = date_squared.to_s.split(//).last(4)
@@ -13,7 +11,7 @@ class Offsets
     offsets
   end
 
-  def gen_today
+  def self.gen_today
     offsets = {}
     todays_date =  Date.today.strftime("%d%m%Y").chars
     todays_date.delete_at(4)
