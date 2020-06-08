@@ -23,14 +23,16 @@ class EnigmaTest < Minitest::Test
   def test_it_can_encrypt_message_with_key_and_todays_date
     enigma = Enigma.new
     encrypted = enigma.encrypt("hello world", "02715")
-    expected = {encryption: "nib udmcxpu", key: "02715", date: "070620"}
+    todays_date = Date.today.strftime("%d%m%y")
+    expected = {encryption: "nib udmcxpu", key: "02715", date: todays_date}
     assert_equal expected, encrypted
   end
 
   def test_it_can_decrypt_message_with_key_and_todays_date
     enigma = Enigma.new
     encrypted = enigma.encrypt("hello world", "02715")
-    expected = {decryption: "hello world", key: "02715", date: "070620"}
+    todays_date = Date.today.strftime("%d%m%y")
+    expected = {decryption: "hello world", key: "02715", date: todays_date}
     assert_equal expected ,enigma.decrypt(encrypted[:encryption], "02715")
   end
 
