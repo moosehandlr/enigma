@@ -13,9 +13,6 @@ class Offsets
   end
 
   def self.gen_today
-    todays_date =  Date.today.strftime("%d%m%Y").chars
-    todays_date.delete_at(4)
-    todays_date.delete_at(4)
-    todays_date.join
+    Date.today.strftime("%d%m%y")
   end
 end

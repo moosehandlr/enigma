@@ -14,6 +14,6 @@ class OffsetsTest < Minitest::Test
   end
 
   def test_it_can_generate_return_string_of_todays_date
-    assert_equal "070620", Offsets.gen_today #June 7 2020 => 07/06/2020
+    assert_equal Date.today.strftime("%d%m%y"), Offsets.gen_today
   end
 end
